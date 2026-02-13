@@ -1,0 +1,24 @@
+id: 0
+name: Testnet deployment
+network: testnet
+stacks-node: https://api.testnet.hiro.so
+bitcoin-node: http://blockstack:blockstacksystem@bitcoind.testnet.stacks.co:18332
+plan:
+  batches:
+  - id: 0
+    transactions:
+    - transaction-type: contract-publish
+      contract-name: escrow
+      expected-sender: ST2XG4RFKSEMF0B91X5R5YEZZMG6DSCD7VY7P017H
+      cost: 15000
+      path: contracts\escrow.clar
+      anchor-block-only: true
+      clarity-version: 4
+    - transaction-type: contract-publish
+      contract-name: usdcx-token
+      expected-sender: ST2XG4RFKSEMF0B91X5R5YEZZMG6DSCD7VY7P017H
+      cost: 4000
+      path: contracts\usdcx-token.clar
+      anchor-block-only: true
+      clarity-version: 4
+    epoch: '3.3'
