@@ -2,14 +2,9 @@
 
 Privacy-First E-Commerce with Smart Escrow & AI Risk Assessment
 
-https://img.shields.io/badge/Stacks-Blockchain-5546FF
-https://img.shields.io/badge/HTTP-402%2520Payment%2520Required-orange
-https://img.shields.io/badge/AI-Risk%2520Engine-blue
-https://img.shields.io/badge/x402-Stacks%2520Standard-purple
-https://img.shields.io/badge/License-MIT-green
 
 📋 Table of Contents
-What is x402?
+x402
 
 Problem Statement
 
@@ -38,23 +33,6 @@ Features
 Why This Is Different
 
 Future Roadmap
-
-Hackathon Submission
-
-Team Feedback
-
-🔥 What is x402?
-x402-stacks is an open payment standard that leverages HTTP 402 Payment Required status code with Stacks blockchain integration.
-
-Core x402 Principles:
-Principle	Implementation
-HTTP 402 Standard	Uses 402 Payment Required status code for payment requests
-Wallet-Based	Crypto wallet as payment method
-Programmable Money	Smart contract-controlled payments
-Open Protocol	No vendor lock-in
-Blockchain Settled	Final settlement on Stacks
-Why HTTP 402?
-The HTTP 402 status code was originally designed for "Payment Required" but never widely adopted. x402 brings it to life by combining it with blockchain technology, creating a standardized way to request and process web3 payments.
 
 In This Project:
 We use x402 to:
@@ -163,47 +141,6 @@ Eliminates blind trust between buyer and seller
 
 Admin can intervene only when necessary
 
-🔄 x402 Integration Deep Dive
-Complete x402 Payment Flow:
-x402 Components in Our Code:
-1. Backend - 402 Response
-python
-# When payment is needed, return 402 status
-return jsonify({
-    "status": "payment_required",
-    "hold": decision == "hold",
-    "amount": order_amount,
-    "contract": escrow_contract_address
-}), 402
-2. Frontend - Handle 402
-javascript
-const res = await fetch("http://127.0.0.1:5000/buy", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(orderData),
-});
-
-if (res.status === 402) {
-  // x402 payment required
-  const data = await res.json();
-  // Trigger wallet payment
-  const tx = await window.LeatherProvider.request("stx_callContract", {
-    contract: data.contract,
-    functionName: "deposit",
-    functionArgs: [...],
-  });
-}
-3. Payment Verification
-python
-@app.route("/verify-payment", methods=["POST"])
-def verify_payment():
-    tx_id = request.json.get("tx_id")
-    # Check on Stacks blockchain
-    url = f"{STACKS_API}/extended/v1/tx/{tx_id}"
-    response = requests.get(url)
-    # Verify contract call
-    if tx_data.get("tx_status") == "success":
-        return jsonify({"status": "verified"})
 🤖 AI Risk Engine
 The AI model analyzes transaction patterns using:
 
